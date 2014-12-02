@@ -4,6 +4,8 @@ simplesamlphp-duosecurity
 Two factor authentication module using Duo Security for SimpleSAMLphp
 
 Usage:
+Rename the folder to duosecurity and place in your SimpleSAMLphp modules folder
+
 Set up a Web SDK integration on your Duo admin website.
 see https://www.duosecurity.com/docs/duoweb for more information
 
