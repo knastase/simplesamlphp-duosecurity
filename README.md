@@ -24,6 +24,11 @@ authentication filters section. (under 'authproc.idp')
             'skey' => '',
             
             'host' => '',
+
+	    // Specify the attribute to be used as the Duo username
+
+	    'usernameAttribute' => '',
+
         ),
 
 Do not change the names of any files in the module
