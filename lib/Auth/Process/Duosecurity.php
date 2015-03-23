@@ -27,6 +27,9 @@ class sspmod_duosecurity_Auth_Process_Duosecurity extends SimpleSAML_Auth_Proces
     private $_host;
 
     private $_authSources = "all";
+
+    private $_usernameAttribute = "username";
+
     /**
      * Initialize Duo Security 
      *
@@ -36,12 +39,18 @@ class sspmod_duosecurity_Auth_Process_Duosecurity extends SimpleSAML_Auth_Proces
      */
     public function __construct($config, $reserved)
     {
-	$this->_host = $config['host'];
-	$this->_akey = $config['akey'];
-	$this->_ikey = $config['ikey'];
-	$this->_skey = $config['skey'];
-	$this->_authSources = $config['authSources'];
+        $this->_host = $config['host'];
+        $this->_akey = $config['akey'];
+        $this->_ikey = $config['ikey'];
+        $this->_skey = $config['skey'];
 
+        if (array_key_exists('authSources', $config)) {
+            $this->_authSources = $config['authSources'];
+        }
+
+        if (array_key_exists('usernameAttribute', $config)) {
+            $this->_usernameAttribute = $config['usernameAttribute'];
+        }
     }
 
     /**
@@ -96,16 +105,17 @@ class sspmod_duosecurity_Auth_Process_Duosecurity extends SimpleSAML_Auth_Proces
             $state['Source'] = $idpmeta;
         }
 
-	if (isset($state['duo_complete'])) {
-		return;
-	}
+        if (isset($state['duo_complete'])) {
+            return;
+        }
 
-	// Set Keys for Duo SDK
-	$state['duosecurity:akey'] = $this->_akey;
-	$state['duosecurity:ikey'] = $this->_ikey;
-	$state['duosecurity:skey'] = $this->_skey;
-	$state['duosecurity:host'] = $this->_host;
-	$state['duosecurity:authSources'] = $this->_authSources;
+        // Set Keys for Duo SDK
+        $state['duosecurity:akey'] = $this->_akey;
+        $state['duosecurity:ikey'] = $this->_ikey;
+        $state['duosecurity:skey'] = $this->_skey;
+        $state['duosecurity:host'] = $this->_host;
+        $state['duosecurity:authSources'] = $this->_authSources;
+        $state['duosecurity:usernameAttribute'] = $this->_usernameAttribute;
 
         // User interaction nessesary. Throw exception on isPassive request	
         if (isset($state['isPassive']) && $state['isPassive'] == true) {
@@ -115,9 +125,8 @@ class sspmod_duosecurity_Auth_Process_Duosecurity extends SimpleSAML_Auth_Proces
         }
 
         // Save state and redirect
-	$id  = SimpleSAML_Auth_State::saveState($state, 'duosecurity:request');
+        $id  = SimpleSAML_Auth_State::saveState($state, 'duosecurity:request');
         $url = SimpleSAML_Module::getModuleURL('duosecurity/getduo.php');
         SimpleSAML_Utilities::redirectTrustedURL($url, array('StateId' => $id));
     }
-
 }

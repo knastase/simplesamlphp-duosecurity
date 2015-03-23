@@ -3,6 +3,7 @@
  * Using Duo's Web SDK
  */
 $attributes = $this->data['attributes'];
+$username_attribute = $this->data['usernameAttribute'];
 include('duo_web.php');
 
 /*
@@ -45,8 +46,8 @@ if(isset($_POST['sig_response'])){ //verify sig response and log in user
  * if the user and pass are good, then generate a sig_request and
  * load up the Duo iframe for secondary authentication
  */
-if(isset($attributes['username'])){
-		$username = $attributes['username'][0];
+if(isset($attributes[$username_attribute])){
+		$username = $attributes[$username_attribute][0];
 		//generate sig request and then load up Duo javascript and iframe
 		$sig_request = Duo::signRequest(IKEY, SKEY, AKEY, $username);
 
