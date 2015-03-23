@@ -76,6 +76,7 @@ $t->data['akey'] = $state['duosecurity:akey'];
 $t->data['ikey'] = $state['duosecurity:ikey'];
 $t->data['skey'] = $state['duosecurity:skey'];
 $t->data['host'] = $state['duosecurity:host'];
+$t->data['usernameAttribute'] = $state['duosecurity:usernameAttribute'];
 $t->data['srcMetadata'] = $state['Source'];
 $t->data['dstMetadata'] = $state['Destination'];
 $t->data['yesTarget'] = SimpleSAML_Module::getModuleURL('duosecurity/getduo.php');
