@@ -105,17 +105,17 @@ class sspmod_duosecurity_Auth_Process_Duosecurity extends SimpleSAML_Auth_Proces
             $state['Source'] = $idpmeta;
         }
 
-	if (isset($state['duo_complete'])) {
-		return;
-	}
+        if (isset($state['duo_complete'])) {
+            return;
+        }
 
-	// Set Keys for Duo SDK
-	$state['duosecurity:akey'] = $this->_akey;
-	$state['duosecurity:ikey'] = $this->_ikey;
-	$state['duosecurity:skey'] = $this->_skey;
-	$state['duosecurity:host'] = $this->_host;
-	$state['duosecurity:authSources'] = $this->_authSources;
-	$state['duosecurity:usernameAttribute'] = $this->_usernameAttribute;
+        // Set Keys for Duo SDK
+        $state['duosecurity:akey'] = $this->_akey;
+        $state['duosecurity:ikey'] = $this->_ikey;
+        $state['duosecurity:skey'] = $this->_skey;
+        $state['duosecurity:host'] = $this->_host;
+        $state['duosecurity:authSources'] = $this->_authSources;
+        $state['duosecurity:usernameAttribute'] = $this->_usernameAttribute;
 
         // User interaction nessesary. Throw exception on isPassive request	
         if (isset($state['isPassive']) && $state['isPassive'] == true) {
@@ -125,9 +125,8 @@ class sspmod_duosecurity_Auth_Process_Duosecurity extends SimpleSAML_Auth_Proces
         }
 
         // Save state and redirect
-	$id  = SimpleSAML_Auth_State::saveState($state, 'duosecurity:request');
+        $id  = SimpleSAML_Auth_State::saveState($state, 'duosecurity:request');
         $url = SimpleSAML_Module::getModuleURL('duosecurity/getduo.php');
         SimpleSAML_Utilities::redirectTrustedURL($url, array('StateId' => $id));
     }
-
 }
