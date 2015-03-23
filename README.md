@@ -13,22 +13,23 @@ In config/config.php, activate the Duo Security module by adding it to the
 authentication filters section. (under 'authproc.idp')
 
             80 => array(
-            'class' => 'duosecurity:Duosecurity',
-            
-            'akey' => 'SECRET KEY UNIQUE TO YOUR APP MUST BE 40 CHARACTERS',
-            
-            // The following values can be found on your Duo admin page
-            
-            'ikey' => '',
-            
-            'skey' => '',
-            
-            'host' => '',
 
-	    // Specify the attribute to be used as the Duo username
+                'class' => 'duosecurity:Duosecurity',
+            
+                'akey' => 'SECRET KEY UNIQUE TO YOUR APP MUST BE 40 CHARACTERS',
+            
+                // The following values can be found on your Duo admin page
+            
+                'ikey' => '',
+            
+                'skey' => '',
+            
+                'host' => '',
 
-	    'usernameAttribute' => '',
+                // Specify the attribute to be used as the Duo username
 
-        ),
+                'usernameAttribute' => '',
+
+            ),
 
 Do not change the names of any files in the module
