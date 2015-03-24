@@ -45,8 +45,28 @@ if (array_key_exists('core:SP', $state)) {
 
 // Duo returned a good auth, pass the user on
 if(isset($_POST['sig_response'])){
-	$state['duo_complete'] = True;	
+    require(SimpleSAML_Module::getModuleDir('duosecurity') . '/templates/duo_web.php');
+    $resp = Duo::verifyResponse(
+        $state['duosecurity:ikey'],
+        $state['duosecurity:skey'],
+        $state['duosecurity:akey'],
+        $_POST['sig_response']
+    );
+
+    if (isset($state['Attributes'][$state['duosecurity:usernameAttribute']])) {
+        $username = $state['Attributes'][$state['duosecurity:usernameAttribute']][0];
+    }
+    else {
+        throw new SimpleSAML_Error_BadRequest('Missing required username attribute.');
+    }
+
+    if ($resp != NULL and $resp === $username) {
+        $state['duo_complete'] = True;
         SimpleSAML_Auth_ProcessingChain::resumeProcessing($state);
+    }
+    else {
+        throw new SimpleSAML_Error_BadRequest('Response verification failed.');
+    }
 }
 
 // Bypass Duo if auth source is not specified in config file
