@@ -39,6 +39,9 @@ class sspmod_duosecurity_Auth_Process_Duosecurity extends SimpleSAML_Auth_Proces
      */
     public function __construct($config, $reserved)
     {
+        parent::__construct($config, $reserved);
+        assert('is_array($config)');
+
         $this->_host = $config['host'];
         $this->_akey = $config['akey'];
         $this->_ikey = $config['ikey'];
@@ -81,10 +84,10 @@ class sspmod_duosecurity_Auth_Process_Duosecurity extends SimpleSAML_Auth_Proces
     public function process(&$state)
     {
         assert('is_array($state)');
-        assert('array_key_exists("UserID", $state)');
         assert('array_key_exists("Destination", $state)');
         assert('array_key_exists("entityid", $state["Destination"])');
         assert('array_key_exists("metadata-set", $state["Destination"])');		
+        assert('array_key_exists("Source", $state)');
         assert('array_key_exists("entityid", $state["Source"])');
         assert('array_key_exists("metadata-set", $state["Source"])');
 
