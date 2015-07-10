@@ -69,7 +69,8 @@ if (isset($attributes[$username_attribute])) {
     $sig_request = Duo::signRequest(IKEY, SKEY, AKEY, $username);
 
 ?>
-    <script src="Duo-Web-v1.bundled.min.js"></script>
+    <script src="Duo-Web-v2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="Duo-Frame.css">
     <?php
         foreach ($this->data['yesData'] as $name => $value) {
             printf('<input type="hidden" id="%s" name="%s" value="%s" />',
@@ -79,11 +80,8 @@ if (isset($attributes[$username_attribute])) {
             );
         }
     ?>
-    <input type="hidden" id="duo_host" value="<?php xecho(HOST); ?>">
-    <input type="hidden" id="duo_sig_request" value="<?php xecho($sig_request); ?>">
-    <script src="Duo-Init.js"></script>
 
-    <iframe id="duo_iframe" frameborder="0"></iframe>
+    <iframe id="duo_iframe" frameborder="0" data-host="<?php xecho(HOST); ?>" data-sig-request="<?php xecho($sig_request); ?>" data-post-action="<?php xecho('getduo.php?StateId=' . $this->data['yesData']['StateId']); ?>"></iframe>
 <?php
 
 }
