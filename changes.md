@@ -1,0 +1,39 @@
+h2. Changes
+
+h3. getduo.php
+SimpleSAML_Configuration::getInstance :white_check_mark:
+SimpleSAML_Logger::info :white_check_mark:
+SimpleSAML_Error_BadRequest  :white_check_mark:
+SimpleSAML_Auth_State::parseStateID NO
+SimpleSAML_Utilities::checkURLAllowed NO
+SimpleSAML_Auth_State::loadState :white_check_mark:
+SimpleSAML_Module::getModuleDir :white_check_mark:
+SimpleSAML_Auth_ProcessingChain::resumeProcessing :white_check_mark:
+SimpleSAML_Error_BadRequest :white_check_mark:
+SimpleSAML_XHTML_Template :white_check_mark:
+SimpleSAML_Module::getModuleURL :white_check_mark:
+
+h3. duoform.php
+SimpleSAML_Error_BadRequest :white_check_mark:
+SimpleSAML_Auth_ProcessingChain::resumeProcessing :white_check_mark:
+
+h3. duo_web
+
+none
+
+h3. Duosecurity.php 
+
+SimpleSAML_Metadata_MetaDataStorageHandler::getMetadataHandler :white_check_mark:
+SimpleSAML_Auth_State::saveState :white_check_mark:
+SimpleSAML_Module::getModuleURL :white_check_mark:
+SimpleSAML_Utilities::redirectTrustedURL NO
+SimpleSAML_Auth_ProcessingFilter :white_check_mark:
+SimpleSAML_Error_NoPassive :white_check_mark:
+
+h3. Changes
+
+SimpleSAML_Utilities::redirectTrustedURL -> SimpleSAML_Utilities::redirect
+SimpleSAML_Auth_State::parseStateID -> Deleted
+SimpleSAML_Utilities::checkURLAllowed -> Deleted 
+
+The rest of the SSO configurations (linkedin/myspace/etc), don't use the parseStateID or checkURLAllowed functions, so just dropping them from the Duo plugin. 

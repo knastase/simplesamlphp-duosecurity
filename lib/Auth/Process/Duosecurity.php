@@ -130,6 +130,6 @@ class sspmod_duosecurity_Auth_Process_Duosecurity extends SimpleSAML_Auth_Proces
         // Save state and redirect
         $id  = SimpleSAML_Auth_State::saveState($state, 'duosecurity:request');
         $url = SimpleSAML_Module::getModuleURL('duosecurity/getduo.php');
-        SimpleSAML_Utilities::redirectTrustedURL($url, array('StateId' => $id));
+        SimpleSAML_Utilities::redirect($url, array('StateId' => $id));
     }
 }
