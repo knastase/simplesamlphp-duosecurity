@@ -29,3 +29,11 @@ SimpleSAML_Module::getModuleURL :white_check_mark:
 SimpleSAML_Utilities::redirectTrustedURL NO
 SimpleSAML_Auth_ProcessingFilter :white_check_mark:
 SimpleSAML_Error_NoPassive :white_check_mark:
+
+h3. Changes
+
+SimpleSAML_Utilities::redirectTrustedURL -> SimpleSAML_Utilities::redirect
+SimpleSAML_Auth_State::parseStateID -> Deleted
+SimpleSAML_Utilities::checkURLAllowed -> Deleted 
+
+The rest of the SSO configurations (linkedin/myspace/etc), don't use the parseStateID or checkURLAllowed functions, so just dropping them from the Duo plugin. 
