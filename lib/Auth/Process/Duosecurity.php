@@ -6,7 +6,7 @@
  *
  * @package simpleSAMLphp
  */
-class sspmod_duosecurity_Auth_Process_Duosecurity extends SimpleSAML_Auth_ProcessingFilter
+class sspmod_duosecurity_Auth_Process_Duosecurity extends SimpleSAML\Auth\ProcessingFilter
 {
 
     /**
@@ -94,7 +94,7 @@ class sspmod_duosecurity_Auth_Process_Duosecurity extends SimpleSAML_Auth_Proces
         $spEntityId = $state['Destination']['entityid'];
         $idpEntityId = $state['Source']['entityid'];
 
-        $metadata = SimpleSAML_Metadata_MetaDataStorageHandler::getMetadataHandler();
+        $metadata = SimpleSAML\Metadata\MetaDataStorageHandler::getMetadataHandler();
 
         /**
          * If the Duo Security module is active on a bridge $state['saml:sp:IdP']
@@ -122,14 +122,14 @@ class sspmod_duosecurity_Auth_Process_Duosecurity extends SimpleSAML_Auth_Proces
 
         // User interaction nessesary. Throw exception on isPassive request	
         if (isset($state['isPassive']) && $state['isPassive'] == true) {
-            throw new SimpleSAML_Error_NoPassive(
+            throw new SimpleSAML\Error\NoPassive(
                 'Unable to login with passive request.'
             );
         }
 
         // Save state and redirect
-        $id  = SimpleSAML_Auth_State::saveState($state, 'duosecurity:request');
-        $url = SimpleSAML_Module::getModuleURL('duosecurity/getduo.php');
-        SimpleSAML_Utilities::redirectTrustedURL($url, array('StateId' => $id));
+        $id  = SimpleSAML\Auth\State::saveState($state, 'duosecurity:request');
+        $url = SimpleSAML\Module::getModuleURL('duosecurity/getduo.php');
+        SimpleSAML\Utilities::redirectTrustedURL($url, array('StateId' => $id));
     }
 }
